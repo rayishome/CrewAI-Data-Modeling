@@ -1,0 +1,280 @@
+Prototype Requirements for CrewAI-Powered Dimensional Modeling and ETL Planning Tool
+
+Overview
+
+This prototype will be a lightweight, web-based application that allows users to define fictional data tables, provide business problems/analysis needs, and generate outputs from three AI-driven expert roles. It leverages the OpenAI API and CrewAI framework to facilitate collaboration among the experts.
+
+
+---
+
+Requirements
+
+1. User Interface (UI)
+
+1. OpenAI API Key Input
+
+A text box labeled "OpenAI API Key" for the user to enter their API key.
+
+Validation to ensure the key is in the correct format and required before proceeding.
+
+
+
+2. Table Schema Input
+
+A large text box labeled "Table Definitions" for the user to input fictional table schemas.
+
+Format:
+
+Table Name: Orders
+Columns: OrderID, CustomerID, OrderDate, TotalAmount
+
+Table Name: Customers
+Columns: CustomerID, CustomerName, Email, Region
+
+Include a placeholder/example schema in the input box to guide the user.
+
+
+
+3. Business Problems/Analysis Needs Input
+
+A multi-line text box labeled "Business Problems and Analysis Needs" for the user to describe their business goals and data use cases.
+
+Example placeholder text:
+
+"I want to analyze customer retention and sales trends."
+
+"I need insights on regional performance and top customers."
+
+
+
+
+4. Submit Button
+
+A button labeled "Go" that initiates the CrewAI expert analysis process.
+
+
+
+5. Results Display Area
+
+Three collapsible panels to display outputs from the three AI experts:
+
+Business Analyst Output: Displays possible analysis options and limitations.
+
+Kimball Expert Output: Displays the proposed dimensional model.
+
+Data Architect Output: Displays the ETL plan and identified challenges.
+
+
+
+
+
+
+---
+
+2. Backend Logic
+
+1. API Key Handling
+
+Retrieve and validate the OpenAI API key from user input.
+
+If invalid, display an error message and halt the process.
+
+
+
+2. Input Parsing
+
+Parse the user-provided table definitions and business problems into structured data for the AI experts.
+
+
+
+3. CrewAI Setup
+
+Configure and initialize 3 expert roles using the CrewAI framework:
+
+1. Business Analyst:
+
+Review the table schemas and business problems.
+
+Identify:
+
+Feasible analysis opportunities.
+
+Data gaps or limitations.
+
+Suggested follow-up questions for the user.
+
+
+
+
+2. Kimball Expert:
+
+Propose a dimensional model based on:
+
+Table schemas.
+
+Business problems and analyst insights.
+
+
+Define facts and dimensions, grain of the data, and any identified relationships.
+
+
+
+3. Data Architect:
+
+Review the outputs from the Business Analyst and Kimball Expert.
+
+Create an ETL plan:
+
+Steps to transform raw data into the dimensional model.
+
+Highlight data issues (e.g., grain conflicts, missing keys).
+
+Suggest technical solutions.
+
+
+
+
+
+
+
+4. Execution Flow
+
+Sequentially execute the three experts, passing outputs from one expert to the next:
+
+1. Business Analyst -> Kimball Expert -> Data Architect.
+
+
+
+Ensure that outputs are clear and structured for display.
+
+
+
+
+
+---
+
+3. Output Display
+
+1. Business Analyst Output
+
+Possible analysis opportunities, e.g.:
+
+"Customer retention can be analyzed by blending Orders and Customers tables."
+
+
+Data gaps or limitations, e.g.:
+
+"The Orders table does not include customer demographics."
+
+
+Suggested questions for the user, e.g.:
+
+"Do you want to include marketing data for retention analysis?"
+
+
+
+
+2. Kimball Expert Output
+
+Dimensional model proposal:
+
+Dimensions (e.g., Time, Customer, Product).
+
+Facts (e.g., Sales Revenue, Order Count).
+
+
+Grain of each fact and relationship descriptions.
+
+
+
+3. Data Architect Output
+
+ETL plan:
+
+Steps for data transformation and loading.
+
+Highlighted issues and resolutions (e.g., "Conflicting grain between Orders and Customers").
+
+
+Suggested scripts or pseudocode.
+
+
+
+
+
+---
+
+4. Technology Stack
+
+1. Frontend
+
+Framework: ReactJS or plain HTML/CSS/JavaScript for simplicity.
+
+Libraries: Axios for API calls, Bootstrap for styling (optional).
+
+
+
+2. Backend
+
+Language: Python (preferred for CrewAI integration).
+
+Framework: Flask or FastAPI.
+
+Libraries: OpenAI Python SDK, CrewAI framework.
+
+
+
+3. Hosting
+
+Local setup for prototype testing.
+
+Optional: Deployment to a lightweight cloud service like Heroku or AWS.
+
+
+
+
+
+---
+
+5. Validation and Error Handling
+
+1. Input Validation
+
+Ensure the OpenAI API key is provided and valid.
+
+Validate table schema format and business problem input.
+
+
+
+2. Error Handling
+
+Handle API request failures (e.g., invalid API key, rate limits).
+
+Display user-friendly error messages.
+
+
+
+3. Output Validation
+
+Ensure AI-generated outputs are coherent and displayed in the correct sections.
+
+
+
+
+
+---
+
+6. Success Criteria
+
+The prototype should:
+
+Allow users to input all required fields.
+
+Display coherent outputs from the three experts.
+
+Highlight the collaborative process among experts.
+
+
+
+This structured prototype will serve as a foundation for testing and refining the AI-driven data pipeline and modeling assistant concept.
+
